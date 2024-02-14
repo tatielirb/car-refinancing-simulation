@@ -9,7 +9,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={classNameType}
+      className={`button ${classNameType}`}
       onClick={onClickProp}
     >
       {title}
