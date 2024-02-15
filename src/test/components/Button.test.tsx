@@ -7,7 +7,7 @@ describe("Button component", () => {
     jest.clearAllMocks();
   });
 
-  it("renders with the provided title and classNameType", () => {
+  test("renders with the provided title and classNameType", () => {
     const title = "Submit Application";
     const classNameType = "primary";
     render(<Button title={title} classNameType={classNameType} />);
@@ -18,7 +18,7 @@ describe("Button component", () => {
     expect(buttonElement).toHaveClass(classNameType);
   });
 
-  it("should emmit events onClickProp function when clicked", () => {
+  test("should emmit events onClickProp function when clicked", () => {
     const onClickMock = jest.fn();
     const title = "Submit Application";
     render(<Button title={title} onClickProp={onClickMock} />);
