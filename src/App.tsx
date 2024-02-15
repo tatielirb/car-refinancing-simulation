@@ -2,6 +2,8 @@ import React, { Suspense, useState } from "react";
 import "./App.scss";
 import Header from "components/Header/Index";
 import Button from "components/Button/Index";
+import Select from "components/Select/Index";
+import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -11,16 +13,7 @@ function App() {
       <div className="personal-form container text-center">
         <form className="row justify-content-md-center">
           <div className="col col-4">
-            <div className="form-floating mb-5">
-              <select
-                className="form-select"
-                id="floatingSelect"
-                aria-label="Floating label select example"
-              >
-                <option>loanPurposeOption</option>
-              </select>
-              <label htmlFor="floatingSelect">Loan Purpose*</label>
-            </div>
+            <Select items={loanPurposeOptions} labelSelect="Loan Purpose*" />
           </div>
           <div className="col col-4">
             <div className="form-floating mb-5">
@@ -34,16 +27,7 @@ function App() {
             </div>
           </div>
           <div className="col col-4">
-            <div className="form-floating mb-5">
-              <select
-                className="form-select"
-                id="floatingSelect"
-                aria-label="Floating label select example"
-              >
-                <option>loanTermOption</option>
-              </select>
-              <label htmlFor="floatingSelect">Loan term(months)*</label>
-            </div>
+            <Select items={loanTermOptions} labelSelect="Loan term(months)*" />
           </div>
 
           <Suspense>
