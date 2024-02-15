@@ -10,7 +10,7 @@ function App() {
       <Header title="Car Refinancing Simulation" />
       <div className="personal-form container text-center">
         <form className="row justify-content-md-center">
-          <div className="col col-3">
+          <div className="col col-4">
             <div className="form-floating mb-5">
               <select
                 className="form-select"
@@ -22,7 +22,7 @@ function App() {
               <label htmlFor="floatingSelect">Loan Purpose*</label>
             </div>
           </div>
-          <div className="col col-3">
+          <div className="col col-4">
             <div className="form-floating mb-5">
               <input
                 className="form-control"
@@ -33,7 +33,7 @@ function App() {
               <label htmlFor="floatingInputValue">Total loan Amount*</label>
             </div>
           </div>
-          <div className="col col-3">
+          <div className="col col-4">
             <div className="form-floating mb-5">
               <select
                 className="form-select"
@@ -47,8 +47,8 @@ function App() {
           </div>
 
           <Suspense>
-            <div className="personal-form--fees">
-              <ul className="list-group list-group-flush">
+            <div className="personal-form--fees row justify-content-md-center">
+              <ul className="list-group list-group-flush col col-6">
                 <li className="list-group-item">
                   <p className="personal-form--fees-title">Monthly payment</p>
                   <span className="personal-form--fees-value">
@@ -63,7 +63,11 @@ function App() {
             </div>
           </Suspense>
 
-          <Button classNameType="btn fw-bold" title="Submit Application" />
+          <div className="row justify-content-md-center">
+            <div className="col col-6">
+              <Button classNameType="btn fw-bold" title="Submit Application" />
+            </div>
+          </div>
         </form>
       </div>
     </div>
