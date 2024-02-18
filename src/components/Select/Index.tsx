@@ -1,21 +1,19 @@
 import React, {useState, ChangeEvent} from "react";
+import "assets/css/inputs.scss";
 import { SelectProps } from "types/components/Select";
 import Option from "./Option";
 
 export default function Select({
   labelSelect,
   items,
-  onChange,
-  initialValue,
-  // valueSelect,
-  // handleChange,
+  onChangeValue,
+  initialValueSelect,
 }: SelectProps) {
-  const [valueSelect, setValueSelect] = useState(initialValue || '');
+  const [valueSelect, setValueSelect] = useState(initialValueSelect || '');
   const selectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const valueChange = event.target.value;
     setValueSelect(valueChange);
-    onChange && onChange(valueChange); // Aciona a função de retorno de chamada
-    console.log(valueChange)
+    onChangeValue && onChangeValue(valueChange); 
   };
   return (
     <div className="form-floating mb-5">

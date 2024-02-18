@@ -15,14 +15,12 @@ function App() {
     setAmountInput(event.target.value);
   };
 
-  const handleLoanPurposeChange = (value: string) => {
-    setLoanPurposeSelect(value);
-    console.log("pegando o valor", value);
+  const handleLoanPurposeChange = (loanPurpose: string) => {
+    setLoanPurposeSelect(loanPurpose);
   };
 
-  const handleTermChange = (value: string) => {
-    setTermsSelect(value);
-    console.log("pegando o valor", value);
+  const handleTermChange = (terms: string) => {
+    setTermsSelect(terms);
   };
 
   return (
@@ -34,8 +32,8 @@ function App() {
             <Select
               items={loanPurposeOptions}
               labelSelect="Loan Purpose*"
-              onChange={handleLoanPurposeChange}
-              initialValue={loanPurpose}
+              onChangeValue={handleLoanPurposeChange}
+              initialValueSelect={loanPurpose}
             />
           </div>
           <div className="col col-4">
@@ -54,8 +52,8 @@ function App() {
             <Select
               items={loanTermOptions}
               labelSelect="Loan term(months)*"
-              onChange={handleTermChange}
-              initialValue={terms}
+              onChangeValue={handleTermChange}
+              initialValueSelect={terms}
             />
           </div>
 

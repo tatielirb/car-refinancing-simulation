@@ -1,10 +1,7 @@
-import { ChangeEvent } from "react";
-
 export interface SelectProps {
   labelSelect?: string;
-  initialValue?: string | number | readonly string[];
-  onChange?: (value: string) => void; 
-  // handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  initialValueSelect?: string | number | readonly string[];
+  onChangeValue?: (value: string) => void; 
   items: OptionProps[];
 }
 
