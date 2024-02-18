@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { ChangeEvent, Suspense, useState } from "react";
 import "./App.scss";
 import Header from "components/Header/Index";
 import Button from "components/Button/Index";
@@ -6,29 +6,46 @@ import Select from "components/Select/Index";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 
 function App() {
-  const [query, setQuery] = useState("");
+  const [amount, setAmountInput] = useState('');
+  const [loanPurpose, setLoanPurposeSelect] = useState<string>('');
+  const [terms, setTermsSelect] = useState('');
+  const handleInputChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    setAmountInput(event.target.value);
+  };
+
+
+
+ 
+  const handleChanges = (event: ChangeEvent<HTMLSelectElement>) => {
+    const novoValor = event.target.value;
+    setLoanPurposeSelect(novoValor);
+  };
+
+ 
+
   return (
     <div className="App">
       <Header title="Car Refinancing Simulation" />
       <div className="personal-form container text-center">
         <form className="row justify-content-md-center">
           <div className="col col-4">
-            <Select items={loanPurposeOptions} labelSelect="Loan Purpose*" />
+            <Select items={loanPurposeOptions} labelSelect="Loan Purpose*" valueSelect={loanPurpose} handleChange={handleChanges}/>
           </div>
           <div className="col col-4">
             <div className="form-floating mb-5">
               <input
                 className="form-control"
                 id="floatingInputValue"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                type="number"
+                value={amount}
+                onChange={handleInputChange}
               />
               <label htmlFor="floatingInputValue">Total loan Amount*</label>
             </div>
           </div>
-          <div className="col col-4">
-            <Select items={loanTermOptions} labelSelect="Loan term(months)*" />
-          </div>
+          {/* <div className="col col-4">
+            <Select items={loanTermOptions} labelSelect="Loan term(months)*" valueSelect={terms}/>
+          </div> */}
 
           <Suspense>
             <div className="personal-form--fees row justify-content-md-center">
@@ -54,6 +71,11 @@ function App() {
           </div>
         </form>
       </div>
+
+
+      <p>O valor do input é: {amount}</p>
+      <p>O valor do loanPurpose é: {loanPurpose}</p>
+      {/* <p>O valor do terms é: {terms}</p> */}
     </div>
   );
 }
