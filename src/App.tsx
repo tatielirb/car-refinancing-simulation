@@ -3,6 +3,7 @@ import "./App.scss";
 import Header from "components/Header/Index";
 import Button from "components/Button/Index";
 import Select from "components/Select/Index";
+import Alert from "components/Alert/Index";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 import UpsellOpportunitiesService from "services/UpsellOpportunitiesService";
 
@@ -10,7 +11,7 @@ function App() {
   const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
   const [apr, setApr] = useState<number>(0);
 
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number>();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(Number(event.target.value));
   };
@@ -40,8 +41,6 @@ function App() {
       terms: terms,
     };
 
-    console.log(requestData);
-
     try {
       const response = await UpsellOpportunitiesService.postOffersInfo(
         requestData
@@ -54,9 +53,15 @@ function App() {
     }
   };
 
+  
+  const [showAlertDisplay, setShowAlertDisplay] = useState(false);
+
   return (
     <div className="App">
       <Header title="Car Refinancing Simulation" />
+      {showAlertDisplay === true && (
+      <Alert message="ok" type="danger" iconName="exclamation-circle-fill"/>
+      )}
       <div className="personal-form container text-center">
         <form className="row justify-content-md-center">
           <div className="col col-4">
@@ -74,7 +79,7 @@ function App() {
                 className="form-control"
                 id="floatingInputValue"
                 type="number"
-                value={amount}
+                value={amount === undefined ? "" : amount}
                 onChange={handleInputChange}
                 required
               />
@@ -91,7 +96,7 @@ function App() {
             />
           </div>
 
-          <Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
             <div className="personal-form--fees row justify-content-md-center">
               <ul className="list-group list-group-flush col col-6">
                 <li className="list-group-item">
