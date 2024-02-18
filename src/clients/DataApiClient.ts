@@ -4,7 +4,7 @@ import { AxiosRequestConfig } from "axios";
 export class DataAPiClient extends BaseClient {
   constructor() {
     super(
-      process.env.APP_DATA_URL as string,
+      process.env.REACT_APP_URL_API as string,
       (config: AxiosRequestConfig): AxiosRequestConfig => {
         config.headers = {
           "Content-Type": "application/json",

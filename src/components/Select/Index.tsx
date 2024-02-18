@@ -10,7 +10,9 @@ export default function Select({
   initialValueSelect,
   required,
 }: SelectProps) {
-  const [valueSelect, setValueSelect] = useState(initialValueSelect || "");
+  const [valueSelect, setValueSelect] = useState<string | number>(
+    initialValueSelect || ""
+  );
   const selectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const valueChange = event.target.value;
     setValueSelect(valueChange);

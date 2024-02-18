@@ -1,7 +1,7 @@
 export interface SelectProps {
   labelSelect?: string;
-  initialValueSelect?: string | number | readonly string[];
-  onChangeValue?: (value: string) => void; 
+  initialValueSelect?: string | number ;
+  onChangeValue?: (value: string | number) => void; 
   required?: boolean;
   items: OptionProps[];
 }

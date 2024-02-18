@@ -1,26 +1,57 @@
-import React, { ChangeEvent, Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import "./App.scss";
 import Header from "components/Header/Index";
 import Button from "components/Button/Index";
 import Select from "components/Select/Index";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
+import UpsellOpportunitiesService from "services/UpsellOpportunitiesService";
 
 function App() {
-  const [amount, setAmountInput] = useState("");
-  const [loanPurpose, setLoanPurposeSelect] = useState("");
-  const [terms, setTermsSelect] = useState("");
-  const handleInputChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setAmountInput(event.target.value);
+  const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
+  const [apr, setApr] = useState<number>(0);
+
+  const [amount, setAmount] = useState<number>(0);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(Number(event.target.value));
   };
 
-  const handleLoanPurposeChange = (loanPurpose: string) => {
-    setLoanPurposeSelect(loanPurpose);
+  const [loanPurpose, setLoanPurpose] = useState<string>("");
+  const handleLoanPurposeChange = (loanPurpose: string | number) => {
+    setLoanPurpose(String(loanPurpose));
   };
 
-  const handleTermChange = (terms: string) => {
-    setTermsSelect(terms);
+  const [terms, setTerms] = useState<number>(0);
+  const handleTermChange = (terms: string | number) => {
+    setTerms(Number(terms));
+  };
+
+  useEffect(() => {
+    if (loanPurpose !== " " && terms !== 0) {
+      if (amount !== 0 && terms !== 0) {
+        handleSubmit();
+      }
+    }
+  }, [amount, loanPurpose, terms]);
+
+  const handleSubmit = async () => {
+    const requestData = {
+      amount: amount,
+      loanPurpose: loanPurpose,
+      terms: terms,
+    };
+
+    console.log(requestData);
+
+    try {
+      const response = await UpsellOpportunitiesService.postOffersInfo(
+        requestData
+      );
+
+      setMonthlyPayments(response.monthlyPayments);
+      setApr(response.apr);
+    } catch (error) {
+      console.error("Erro ao enviar os dados:", error);
+    }
   };
 
   return (
@@ -66,12 +97,12 @@ function App() {
                 <li className="list-group-item">
                   <p className="personal-form--fees-title">Monthly payment</p>
                   <span className="personal-form--fees-value">
-                    monthlyPayments
+                    {monthlyPayments}
                   </span>
                 </li>
                 <li className="list-group-item">
                   <p className="personal-form--fees-title">APR</p>
-                  <p className="personal-form--fees-value">apr%</p>
+                  <p className="personal-form--fees-value">{apr} %</p>
                 </li>
               </ul>
             </div>
