@@ -2,6 +2,7 @@ export interface SelectProps {
   labelSelect?: string;
   initialValueSelect?: string | number | readonly string[];
   onChangeValue?: (value: string) => void; 
+  required?: boolean;
   items: OptionProps[];
 }
 

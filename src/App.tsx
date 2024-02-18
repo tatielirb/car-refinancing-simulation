@@ -34,6 +34,7 @@ function App() {
               labelSelect="Loan Purpose*"
               onChangeValue={handleLoanPurposeChange}
               initialValueSelect={loanPurpose}
+              required={true}
             />
           </div>
           <div className="col col-4">
@@ -44,6 +45,7 @@ function App() {
                 type="number"
                 value={amount}
                 onChange={handleInputChange}
+                required
               />
               <label htmlFor="floatingInputValue">Total loan Amount*</label>
             </div>
@@ -54,6 +56,7 @@ function App() {
               labelSelect="Loan term(months)*"
               onChangeValue={handleTermChange}
               initialValueSelect={terms}
+              required={true}
             />
           </div>
 
