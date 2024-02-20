@@ -1,5 +1,6 @@
 import React from "react";
 import { AlertProps } from "types/components/Alert";
+import "./alert.scss"
 
 export default function Alert({ message, type, iconName }: AlertProps) {
   return (

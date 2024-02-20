@@ -10,6 +10,10 @@ import SimulatorService from "services/SimulatorService";
 function App() {
   const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
   const [apr, setApr] = useState<number>(0);
+  const [showAlertDisplay, setShowAlertDisplay] = useState(false);
+  const trueAlert = () => {
+    setShowAlertDisplay(true)
+  }
 
   const [amount, setAmount] = useState<number>();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,13 +52,15 @@ function App() {
 
       setMonthlyPayments(response.monthlyPayments);
       setApr(response.apr);
+      trueAlert();
+      
     } catch (error) {
       console.error("Erro ao enviar os dados:", error);
     }
   };
 
   
-  const [showAlertDisplay, setShowAlertDisplay] = useState(false);
+  
 
   return (
     <div className="App">
