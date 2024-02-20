@@ -5,7 +5,7 @@ import Button from "components/Button/Index";
 import Select from "components/Select/Index";
 import Alert from "components/Alert/Index";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
-import UpsellOpportunitiesService from "services/UpsellOpportunitiesService";
+import SimulatorService from "services/SimulatorService";
 
 function App() {
   const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
@@ -42,7 +42,7 @@ function App() {
     };
 
     try {
-      const response = await UpsellOpportunitiesService.postOffersInfo(
+      const response = await SimulatorService.postOffersInfo(
         requestData
       );
 
