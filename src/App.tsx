@@ -10,10 +10,6 @@ import SimulatorService from "services/SimulatorService";
 function App() {
   const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
   const [apr, setApr] = useState<number>(0);
-  const [showAlertDisplay, setShowAlertDisplay] = useState(false);
-  const trueAlert = () => {
-    setShowAlertDisplay(true)
-  }
 
   const [amount, setAmount] = useState<number>();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,27 +42,48 @@ function App() {
     };
 
     try {
-      const response = await SimulatorService.postOffersInfo(
-        requestData
-      );
+      const response = await SimulatorService.postOffersInfo(requestData);
 
       setMonthlyPayments(response.monthlyPayments);
       setApr(response.apr);
-      trueAlert();
-      
     } catch (error) {
       console.error("Erro ao enviar os dados:", error);
+      showAlert(
+        "danger",
+        "Sorry! We had a problem with our service. Try again later!",
+        "exclamation-circle-fill"
+      );
     }
   };
 
-  
-  
+  const [showAlertDisplay, setShowAlertDisplay] = useState(false);
+
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("");
+  const [iconName, setIconName] = useState("");
+
+  const showAlert = (type: string, message: string, iconName?: string) => {
+    setMessage(message);
+    setType(type);
+    if (iconName !== undefined) {
+      setIconName(iconName);
+    }
+    setShowAlertDisplay(true);
+    setAutoHide();
+  };
+
+  const setAutoHide = () => {
+    const duration = 10000;
+    setTimeout(() => {
+      setShowAlertDisplay(false);
+    }, duration);
+  };
 
   return (
     <div className="App">
       <Header title="Car Refinancing Simulation" />
       {showAlertDisplay === true && (
-      <Alert message="ok" type="danger" iconName="exclamation-circle-fill"/>
+        <Alert message={message} type={type} iconName={iconName} />
       )}
       <div className="personal-form container text-center">
         <form className="row justify-content-md-center">
