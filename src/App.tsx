@@ -6,6 +6,7 @@ import Select from "components/Select/Index";
 import Alert from "components/Alert/Index";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 import SimulatorService from "services/SimulatorService";
+import { useAlert } from "hooks/UseAlert";
 
 function App() {
   const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
@@ -80,29 +81,8 @@ function App() {
   }
 }
 
-  //passar para um hook
-  const [showAlertDisplay, setShowAlertDisplay] = useState(false);
 
-  const [message, setMessage] = useState("");
-  const [type, setType] = useState("");
-  const [iconName, setIconName] = useState("");
-
-  const showAlert = (type: string, message: string, iconName?: string) => {
-    setMessage(message);
-    setType(type);
-    if (iconName !== undefined) {
-      setIconName(iconName);
-    }
-    setShowAlertDisplay(true);
-    setAutoHide();
-  };
-
-  const setAutoHide = () => {
-    const duration = 10000;
-    setTimeout(() => {
-      setShowAlertDisplay(false);
-    }, duration);
-  };
+  const [showAlertDisplay, message, type, iconName, showAlert] = useAlert();
 
   return (
     <div className="App">
