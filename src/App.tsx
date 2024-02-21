@@ -6,9 +6,11 @@ import Select from "components/Select/Index";
 import Alert from "components/Alert/Index";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 import SimulatorService from "services/SimulatorService";
-import { useAlert } from "hooks/UseAlert";
+import { useAlerts } from "hooks/useAlerts";
+
 
 function App() {
+  const [showAlertDisplay, message, type, iconName, showAlert] = useAlerts();
   const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
   const [apr, setApr] = useState<number>(0);
 
@@ -82,7 +84,7 @@ function App() {
 }
 
 
-  const [showAlertDisplay, message, type, iconName, showAlert] = useAlert();
+  
 
   return (
     <div className="App">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useAlert = (): [
+export const useAlerts = (): [
   boolean,
   string,
   string,
