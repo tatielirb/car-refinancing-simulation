@@ -28,7 +28,8 @@ function App() {
 
   useEffect(() => {
     if (loanPurpose !== " " && terms !== 0) {
-      if (amount !== 0 && terms !== 0) {
+      if (amount !== 0 && amount !== undefined && terms !== 0) {
+        console.log("amount !== 0 && terms !== 0" , amount,  terms )
         handleSubmit();
       }
     }
@@ -56,6 +57,30 @@ function App() {
     }
   };
 
+
+  const postSubmissionsData = () => {
+    try {
+      console.log("vai ter coisa aqui")
+    } catch (error: any) {
+      if (loanPurpose === "API error") {
+        showAlert(
+          "danger",
+          "Sorry! We had a problem with our service. Try again later!",
+          "exclamation-circle-fill"
+        );
+      } else {
+        showAlert(
+          "warning",
+          "It is necessary to fill in all fields on the form.",
+          "exclamation-circle-fill"
+        );
+        
+      
+    }
+  }
+}
+
+  //passar para um hook
   const [showAlertDisplay, setShowAlertDisplay] = useState(false);
 
   const [message, setMessage] = useState("");
@@ -138,7 +163,7 @@ function App() {
 
           <div className="row justify-content-md-center">
             <div className="col col-6">
-              <Button classNameType="btn fw-bold" title="Submit Application" />
+              <Button classNameType="btn fw-bold" title="Submit Application" onClickProp={postSubmissionsData}/>
             </div>
           </div>
         </form>
