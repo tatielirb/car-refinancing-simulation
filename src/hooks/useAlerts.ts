@@ -1,12 +1,6 @@
 import { useState } from "react";
 
-export const useAlerts = (): [
-  boolean,
-  string,
-  string,
-  string,
-  (type: string, message: string, iconName?: string) => void
-] => {
+export const useAlerts = () => {
   const [showAlertDisplay, setAlertDisplay] = useState(false);
   const [message, setMessage] = useState("");
   const [type, setType] = useState("");
@@ -29,5 +23,5 @@ export const useAlerts = (): [
     }, duration);
   };
 
-  return [showAlertDisplay, message, type, iconName, showAlert];
+  return { showAlertDisplay, message, type, iconName, showAlert };
 };
