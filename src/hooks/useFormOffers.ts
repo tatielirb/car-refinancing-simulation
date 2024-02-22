@@ -10,6 +10,15 @@ export const useFormOffers = () => {
   const [terms, setTerms] = useState<number>(0);
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
 
+  useEffect(() => {
+    if (loanPurpose !== " " && terms !== 0) {
+      if (amount !== 0 && amount !== undefined && terms !== 0) {
+        console.log("amount !== 0 && terms !== 0", amount, terms);
+        handleSubmit();
+      }
+    }
+  }, [amount, loanPurpose, terms]);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(Number(event.target.value));
   };
@@ -21,15 +30,6 @@ export const useFormOffers = () => {
   const handleTermChange = (terms: string | number) => {
     setTerms(Number(terms));
   };
-
-  useEffect(() => {
-    if (loanPurpose !== " " && terms !== 0) {
-      if (amount !== 0 && amount !== undefined && terms !== 0) {
-        console.log("amount !== 0 && terms !== 0", amount, terms);
-        handleSubmit();
-      }
-    }
-  }, [amount, loanPurpose, terms]);
 
   const handleSubmit = async () => {
     const requestData = {
