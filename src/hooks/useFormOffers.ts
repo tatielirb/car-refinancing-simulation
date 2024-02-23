@@ -31,6 +31,17 @@ export const useFormOffers = () => {
     setTerms(Number(terms));
   };
 
+  const responseFees = [
+    {
+      label: "Monthly payment",
+      value: monthlyPayments,
+    },
+    {
+      label: "APR",
+      value: apr,
+    },
+  ];
+
   const handleSubmit = async () => {
     const requestData = {
       amount: amount,
@@ -79,6 +90,7 @@ export const useFormOffers = () => {
     amount,
     loanPurpose,
     terms,
+    responseFees,
     setMonthlyPayments,
     setApr,
     setAmount,

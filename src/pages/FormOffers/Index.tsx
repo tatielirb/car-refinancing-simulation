@@ -2,22 +2,17 @@ import React, { Suspense } from "react";
 import "./formOffers.scss";
 import Button from "components/Button/Index";
 import Select from "components/Select/Index";
+import ListRow from "components/ListRow/Index";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 
 import { useFormOffers } from "hooks/useFormOffers";
 
 function FormOffers() {
   const {
-    monthlyPayments,
-    apr,
     amount,
     loanPurpose,
     terms,
-    setMonthlyPayments,
-    setApr,
-    setAmount,
-    setLoanPurpose,
-    setTerms,
+    responseFees,
     handleInputChange,
     handleLoanPurposeChange,
     handleTermChange,
@@ -60,20 +55,7 @@ function FormOffers() {
         </div>
 
         <Suspense fallback={<div>Loading...</div>}>
-          <div className="personal-form--fees row justify-content-md-center">
-            <ul className="list-group list-group-flush col col-6">
-              <li className="list-group-item">
-                <p className="personal-form--fees-title">Monthly payment</p>
-                <span className="personal-form--fees-value">
-                  {monthlyPayments}
-                </span>
-              </li>
-              <li className="list-group-item">
-                <p className="personal-form--fees-title">APR</p>
-                <p className="personal-form--fees-value">{apr} %</p>
-              </li>
-            </ul>
-          </div>
+            <ListRow items={responseFees}/>
         </Suspense>
 
         <div className="row justify-content-md-center">
