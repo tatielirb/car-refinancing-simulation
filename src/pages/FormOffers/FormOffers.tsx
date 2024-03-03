@@ -7,7 +7,7 @@ import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 
 import { useFormOffers } from "hooks/useFormOffers";
 
-function FormOffers() {
+export default function FormOffers() {
   const {
     amount,
     loanPurpose,
@@ -19,7 +19,6 @@ function FormOffers() {
     handleTermChange,
     postSubmissionsData,
   } = useFormOffers();
-
 
   return (
     <div className="personal-form container text-center">
@@ -77,5 +76,3 @@ function FormOffers() {
     </div>
   );
 }
-
-export default FormOffers;
