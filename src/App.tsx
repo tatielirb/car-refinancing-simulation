@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.scss";
-import Header from "components/Header/Index";
-import Alert from "components/Alert/Alert";
+import Header from "components/Header/header";
+import Alert from "components/Alert";
 import FormOffers from "pages/FormOffers/Index";
 import { useAlerts } from "hooks/useAlerts";
 
