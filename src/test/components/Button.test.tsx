@@ -1,6 +1,5 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Button from "components/Button/button";
+import Button from "components/Button";
 
 describe("Button component", () => {
   afterEach(() => {

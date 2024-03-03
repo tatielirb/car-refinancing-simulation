@@ -1,6 +1,5 @@
-import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import Select from "components/Select/Select";
+import Select from "components/Select";
 
 jest.mock(
   "components/Select/Option",

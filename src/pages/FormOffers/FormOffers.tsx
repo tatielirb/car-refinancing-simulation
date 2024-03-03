@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import "./formOffers.scss";
-import Button from "components/Button/button";
-import Select from "components/Select/Select";
-import ListRow from "components/ListRow/ListRow";
+import Button from "components/Button";
+import Select from "components/Select";
+import ListRow from "components/ListRow";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 
 import { useFormOffers } from "hooks/useFormOffers";
