@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import FormOffers from "pages/FormOffers/FormOffers";
+import FormOffers from "pages/FormOffers";
 
 export default function MainRoutes() {
   return (

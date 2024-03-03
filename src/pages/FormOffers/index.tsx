@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import "./formOffers.scss";
 import Button from "components/Button";
 import Select from "components/Select";

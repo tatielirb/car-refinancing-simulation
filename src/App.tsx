@@ -2,7 +2,6 @@ import React from "react";
 import "./App.scss";
 import Header from "components/Header";
 import Alert from "components/Alert";
-import FormOffers from "pages/FormOffers/FormOffers";
 import { useAlerts } from "hooks/useAlerts";
 import MainRoutes from "route/Routes";
 
@@ -15,8 +14,6 @@ function App() {
       {showAlertDisplay === true && (
         <Alert message={message} type={type} iconName={iconName} />
       )}
-
-      <FormOffers />
       <MainRoutes />
     </div>
   );
