@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.scss";
-import Header from "components/Header/Index";
-import Alert from "components/Alert/Index";
-import FormOffers from "pages/FormOffers/Index";
+import Header from "components/Header";
+import Alert from "components/Alert";
 import { useAlerts } from "hooks/useAlerts";
+import MainRoutes from "route/Routes";
 
 function App() {
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
@@ -14,8 +14,7 @@ function App() {
       {showAlertDisplay === true && (
         <Alert message={message} type={type} iconName={iconName} />
       )}
-
-      <FormOffers />
+      <MainRoutes />
     </div>
   );
 }

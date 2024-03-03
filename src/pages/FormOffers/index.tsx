@@ -1,17 +1,18 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import "./formOffers.scss";
-import Button from "components/Button/Index";
-import Select from "components/Select/Index";
-import ListRow from "components/ListRow/Index";
+import Button from "components/Button";
+import Select from "components/Select";
+import ListRow from "components/ListRow";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 
 import { useFormOffers } from "hooks/useFormOffers";
 
-function FormOffers() {
+export default function FormOffers() {
   const {
     amount,
     loanPurpose,
     terms,
+    dataLoaded,
     responseFees,
     handleInputChange,
     handleLoanPurposeChange,
@@ -55,7 +56,7 @@ function FormOffers() {
         </div>
 
         <Suspense fallback={<div>Loading...</div>}>
-            <ListRow items={responseFees}/>
+          {dataLoaded ? <ListRow items={responseFees} /> : null}
         </Suspense>
 
         <div className="row justify-content-md-center">
@@ -75,5 +76,3 @@ function FormOffers() {
     </div>
   );
 }
-
-export default FormOffers;
