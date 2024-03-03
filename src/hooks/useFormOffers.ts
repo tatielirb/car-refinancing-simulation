@@ -3,12 +3,13 @@ import { useAlerts } from "hooks/useAlerts";
 import SimulatorService from "services/SimulatorService";
 
 export const useFormOffers = () => {
-  const [monthlyPayments, setMonthlyPayments] = useState<number>(0);
-  const [apr, setApr] = useState<number>(0);
+  const [monthlyPayments, setMonthlyPayments] = useState<number>();
+  const [apr, setApr] = useState<number>();
   const [amount, setAmount] = useState<number>();
   const [loanPurpose, setLoanPurpose] = useState<string>("");
   const [terms, setTerms] = useState<number>(0);
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     if (loanPurpose !== " " && terms !== 0) {
@@ -54,6 +55,7 @@ export const useFormOffers = () => {
 
       setMonthlyPayments(response.monthlyPayments);
       setApr(response.apr);
+      setDataLoaded(true); 
     } catch (error) {
       console.error("Erro ao enviar os dados:", error);
       showAlert(
@@ -91,6 +93,8 @@ export const useFormOffers = () => {
     loanPurpose,
     terms,
     responseFees,
+    dataLoaded,
+    setDataLoaded,
     setMonthlyPayments,
     setApr,
     setAmount,

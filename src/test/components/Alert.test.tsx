@@ -1,5 +1,5 @@
 import React from "react";
-import Alert from "components/Alert/Index";
+import Alert from "components/Alert/Alert";
 import { render, screen } from "@testing-library/react";
 
 describe("Alert component", () => {

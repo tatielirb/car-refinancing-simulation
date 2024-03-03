@@ -12,12 +12,14 @@ function FormOffers() {
     amount,
     loanPurpose,
     terms,
+    dataLoaded,
     responseFees,
     handleInputChange,
     handleLoanPurposeChange,
     handleTermChange,
     postSubmissionsData,
   } = useFormOffers();
+
 
   return (
     <div className="personal-form container text-center">
@@ -55,7 +57,7 @@ function FormOffers() {
         </div>
 
         <Suspense fallback={<div>Loading...</div>}>
-            <ListRow items={responseFees}/>
+          {dataLoaded ? <ListRow items={responseFees} /> : null}
         </Suspense>
 
         <div className="row justify-content-md-center">
