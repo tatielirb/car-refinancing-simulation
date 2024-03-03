@@ -1,26 +1,4 @@
-# Car Refinancing Simulation
-
-## Requirement
-
-- [Node.js](https://nodejs.org/)
-- [NPM](https://www.npmjs.com/)
-
-## Technologies
-
-As tecnologias utilizadas neste projeto foram:
-
-- [Node.js](https://nodejs.org/)
-- [React](https://react.dev/)
-- [Sass](http://lesscss.org/)
-- [Bootstrap](https://getbootstrap.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Jest](https://jestjs.io/)
-- [Testing Library](https://testing-library.com/)
-- [Axios](https://axios-http.com/ptbr/docs/intro)
-
-
-
-## Getting Started with Create React App
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -37,10 +15,6 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `npm test`
-
-or 
-
-### `npm run test:watch`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.

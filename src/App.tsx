@@ -1,21 +1,24 @@
-import React from "react";
-import "./App.scss";
-import Header from "components/Header/Index";
-import Alert from "components/Alert/Index";
-import FormOffers from "pages/FormOffers/Index";
-import { useAlerts } from "hooks/useAlerts";
+import React from 'react';
+import logo from './logo.svg';
+import './App.scss';
 
 function App() {
-  const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
-
   return (
     <div className="App">
-      <Header title="Car Refinancing Simulation" />
-      {showAlertDisplay === true && (
-        <Alert message={message} type={type} iconName={iconName} />
-      )}
-
-      <FormOffers />
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }
