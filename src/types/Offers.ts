@@ -1,6 +1,6 @@
 export interface OffersPayload {
     loanPurpose: string;
-    amount: number | undefined;
+    amount: number ;
     terms: number;
   }
   export interface OffersResponse {

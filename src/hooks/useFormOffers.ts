@@ -8,6 +8,7 @@ export const useFormOffers = () => {
   const [amount, setAmount] = useState<number>();
   const [loanPurpose, setLoanPurpose] = useState<string>("");
   const [terms, setTerms] = useState<number>(0);
+  const [id, setId] = useState<string>();
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
   const [dataLoaded, setDataLoaded] = useState(false);
 
@@ -45,7 +46,7 @@ export const useFormOffers = () => {
 
   const handleSubmit = async () => {
     const requestData = {
-      amount: amount,
+      amount: amount || 0,
       loanPurpose: loanPurpose,
       terms: terms,
     };
@@ -55,7 +56,9 @@ export const useFormOffers = () => {
 
       setMonthlyPayments(response.monthlyPayments);
       setApr(response.apr);
-      setDataLoaded(true); 
+      setDataLoaded(true);
+
+      await postSubmissionsData(response.id, requestData);
     } catch (error) {
       console.error("Erro ao enviar os dados:", error);
       showAlert(
@@ -66,8 +69,24 @@ export const useFormOffers = () => {
     }
   };
 
-  const postSubmissionsData = () => {
+  const postSubmissionsData = async (
+    id: string,
+    requestData: {
+      amount: number;
+      loanPurpose: string;
+      terms: number;
+    }
+  ) => {
     try {
+      const submissionData = {
+        offerId: id,
+        ...requestData,
+      };
+
+      const submissionResponse = await SimulatorService.postSubmissions(
+        submissionData
+      );
+
       console.log("vai ter coisa aqui");
     } catch (error: any) {
       if (loanPurpose === "API error") {
