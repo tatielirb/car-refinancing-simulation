@@ -9,7 +9,6 @@ import Header from "components/Header";
 import SimulatorService from "services/SimulatorService";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 import { useAlerts } from "hooks/useAlerts";
-import getLoansAvailableList from 'pages/ConfirmationOpportunities';
 
 export default function FormOffers() {
   const [monthlyPayments, setMonthlyPayments] = useState<number>();
@@ -17,12 +16,10 @@ export default function FormOffers() {
   const [amount, setAmount] = useState<number>();
   const [loanPurpose, setLoanPurpose] = useState<string>("");
   const [terms, setTerms] = useState<number>(0);
-  const [id, setId] = useState<string>();
+  const [id, setId] = useState<string | undefined>();
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
   const [dataLoaded, setDataLoaded] = useState(false);
   const navigate = useNavigate();
-  const [submissionData, setSubmissionData] = useState(null);
-
 
   useEffect(() => {
     if (loanPurpose !== " " && terms !== 0) {
@@ -69,10 +66,9 @@ export default function FormOffers() {
       setMonthlyPayments(response.monthlyPayments);
       setApr(response.apr);
       setDataLoaded(true);
-
-      postSubmissionsData(response.id, requestData);
+      setId(response.id);
+      console.log("response handleSubmit", response);
     } catch (error) {
-      console.error("Erro ao enviar os dados:", error);
       showAlert(
         "danger",
         "Sorry! We had a problem with our service. Try again later!",
@@ -81,30 +77,33 @@ export default function FormOffers() {
     }
   };
 
-  const postSubmissionsData = async (
-    id: string,
-    requestData: {
-      amount: number;
-      loanPurpose: string;
-      terms: number;
-    }
-  ) => {
+  const postSubmissionsData = async () => {
+    console.log("id", id);
+    console.log("requestData", requestData);
+    debugger;
     try {
-      const submissionData = {
-        offerId: id,
-        ...requestData,
-      };
+      if (id !== undefined) {
+        const submissionData = {
+          offerId: id,
+          ...requestData,
+        };
+        console.log("submissionData", submissionData);
 
-      const submissionResponse = await SimulatorService.postSubmissions(
-        submissionData
-      );
+        const submissionResponse = await SimulatorService.postSubmissions(
+          submissionData
+        );
 
-      console.log("submissionResponse", submissionResponse);
-      // getLoansAvailableList(submissionResponse.userId);
+        console.log("submissionResponse", submissionResponse);
 
-  
-      navigate(`/confirmation-opportunities?${submissionResponse.userId}`);
-      console.log("vai ter coisa aqui");
+        navigate(`/confirmation-opportunities?${submissionResponse.userId}`);
+        console.log("vai ter coisa aqui");
+      } else {
+        showAlert(
+          "warning",
+          "It is necessary to fill in all fields on the form.",
+          "exclamation-circle-fill"
+        );
+      }
     } catch (error: any) {
       if (requestData.loanPurpose === "API error") {
         showAlert(
@@ -173,11 +172,7 @@ export default function FormOffers() {
               <Button
                 classNameType="btn fw-bold"
                 title="Submit Application"
-                onClickProp={() => {
-                  if (id !== undefined) {
-                    postSubmissionsData(id, requestData);
-                  }
-                }}
+                onClickProp={() => postSubmissionsData()}
               />
             </div>
           </div>
