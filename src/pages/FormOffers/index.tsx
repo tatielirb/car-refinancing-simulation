@@ -1,4 +1,5 @@
 import { Suspense, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./formOffers.scss";
 import Button from "components/Button";
 import Select from "components/Select";
@@ -8,6 +9,7 @@ import Header from "components/Header";
 import SimulatorService from "services/SimulatorService";
 import { loanPurposeOptions, loanTermOptions } from "utils/DataSelect";
 import { useAlerts } from "hooks/useAlerts";
+import getLoansAvailableList from 'pages/ConfirmationOpportunities';
 
 export default function FormOffers() {
   const [monthlyPayments, setMonthlyPayments] = useState<number>();
@@ -18,6 +20,9 @@ export default function FormOffers() {
   const [id, setId] = useState<string>();
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
   const [dataLoaded, setDataLoaded] = useState(false);
+  const navigate = useNavigate();
+  const [submissionData, setSubmissionData] = useState(null);
+
 
   useEffect(() => {
     if (loanPurpose !== " " && terms !== 0) {
@@ -94,8 +99,11 @@ export default function FormOffers() {
         submissionData
       );
 
-      console.log(submissionResponse);
+      console.log("submissionResponse", submissionResponse);
+      // getLoansAvailableList(submissionResponse.userId);
 
+  
+      navigate(`/confirmation-opportunities?${submissionResponse.userId}`);
       console.log("vai ter coisa aqui");
     } catch (error: any) {
       if (requestData.loanPurpose === "API error") {
