@@ -1,3 +1,4 @@
+import { Suspense, useEffect, useState } from "react";
 import "./confirmationOpportunities.scss";
 import Card from "pages/ConfirmationOpportunities/components/Card";
 import ConfirmationMessage from "./components/ConfirmationMessage";
@@ -10,6 +11,12 @@ import { LoanAvailableData } from "types/Loans";
 
 export default function ConfirmationOpportunities() {
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
+
+  // useEffect(() => {
+  //   getLoansAvailableList(userId);
+    
+    
+  // }, []);
 
   const getLoansAvailableList = async (userId: string) => {
     try {

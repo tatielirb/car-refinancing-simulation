@@ -12,7 +12,7 @@ export interface OffersPayload {
     loanPurpose: string;
     amount: number;
     terms: number;
-    offerId: string;
+    offerId: string | undefined;
   }
   export interface SubmissionsResponse {
     userId: string;

@@ -67,7 +67,6 @@ export default function FormOffers() {
       setApr(response.apr);
       setDataLoaded(true);
       setId(response.id);
-      console.log("response handleSubmit", response);
     } catch (error) {
       showAlert(
         "danger",
@@ -78,34 +77,18 @@ export default function FormOffers() {
   };
 
   const postSubmissionsData = async () => {
-    console.log("id", id);
-    console.log("requestData", requestData);
-    debugger;
+    const submissionData = {
+      offerId: id,
+      ...requestData,
+    };
+
     try {
-      if (id !== undefined) {
-        const submissionData = {
-          offerId: id,
-          ...requestData,
-        };
-        console.log("submissionData", submissionData);
-
-        const submissionResponse = await SimulatorService.postSubmissions(
-          submissionData
-        );
-
-        console.log("submissionResponse", submissionResponse);
-
-        navigate(`/confirmation-opportunities?${submissionResponse.userId}`);
-        console.log("vai ter coisa aqui");
-      } else {
-        showAlert(
-          "warning",
-          "It is necessary to fill in all fields on the form.",
-          "exclamation-circle-fill"
-        );
-      }
+      const submissionResponse = await SimulatorService.postSubmissions(
+        submissionData
+      );
+      navigate(`/confirmation-opportunities?${submissionResponse.userId}`);
     } catch (error: any) {
-      if (requestData.loanPurpose === "API error") {
+      if (submissionData.loanPurpose === "API error") {
         showAlert(
           "danger",
           "Sorry! We had a problem with our service. Try again later!",
@@ -115,7 +98,7 @@ export default function FormOffers() {
         showAlert(
           "warning",
           "It is necessary to fill in all fields on the form.",
-          "exclamation-circle-fill"
+          "exclamat ion-circle-fill"
         );
       }
     }
@@ -166,21 +149,18 @@ export default function FormOffers() {
           <Suspense fallback={<div>Loading...</div>}>
             {dataLoaded ? <ListRow items={responseFees} /> : null}
           </Suspense>
-
-          <div className="row justify-content-md-center">
-            <div className="col col-6">
-              <Button
-                classNameType="btn fw-bold"
-                title="Submit Application"
-                onClickProp={() => postSubmissionsData()}
-              />
-            </div>
-          </div>
         </form>
-
-        <p>O valor do input é: {amount}</p>
-        <p>O valor do loanPurpose é: {loanPurpose}</p>
-        <p>O valor do terms é: {terms}</p>
+        <div className="row justify-content-md-center">
+          <div className="col col-6">
+            <Button
+              classNameType="btn fw-bold"
+              title="Submit Application"
+              onClickProp={() => {
+                postSubmissionsData();
+              }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
