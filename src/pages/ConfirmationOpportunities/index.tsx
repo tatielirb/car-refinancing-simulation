@@ -16,10 +16,12 @@ export default function ConfirmationOpportunities() {
   >([]);
 
   useEffect(() => {
-    getLoansAvailableList(userId);
+    if (userId !== null) {
+      getLoansAvailableList(userId);
+    }
   }, []);
 
-  const userId = "anId";
+  const userId = localStorage.getItem("userId");
 
   const getLoansAvailableList = async (userId: string) => {
     try {

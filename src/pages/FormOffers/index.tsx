@@ -86,6 +86,8 @@ export default function FormOffers() {
       const submissionResponse = await SimulatorService.postSubmissions(
         submissionData
       );
+      localStorage.setItem("userId", submissionResponse.userId);
+
       navigate(`/confirmation-opportunities?${submissionResponse.userId}`);
     } catch (error: any) {
       if (submissionData.loanPurpose === "API error") {
