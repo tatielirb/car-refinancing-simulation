@@ -1,5 +1,8 @@
+export interface CardProps {
+  loansAvailableList: LoansAvailableResponse["loansAvailable"];
+}
 export interface LoansAvailableResponse {
-  loansAvailable: LoanAvailableData;
+  loansAvailable: LoanAvailableData[];
 }
 
 export interface LoanAvailableData {
