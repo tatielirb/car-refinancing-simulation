@@ -1,5 +1,7 @@
 export interface ButtonProps {
-    title: string;
-    classNameType?: string;
-    onClickProp?: () => void;
-  }
+  title: string;
+  classNameType?: string;
+  spinner?: boolean;
+  disabled?: boolean;
+  onClickProp?: () => void;
+}

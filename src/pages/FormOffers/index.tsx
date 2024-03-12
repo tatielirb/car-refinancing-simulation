@@ -17,8 +17,10 @@ export default function FormOffers() {
   const [loanPurpose, setLoanPurpose] = useState<string>("");
   const [terms, setTerms] = useState<number>(0);
   const [id, setId] = useState<string | undefined>();
-  const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [spinner, setSpinner] = useState<boolean>();
+  const [disabled, setDisabled] = useState<boolean>();
+  const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -60,12 +62,16 @@ export default function FormOffers() {
   };
 
   const handleSubmit = async () => {
+    setSpinner(true);
+    setDisabled(true);
     try {
       const response = await SimulatorService.postOffersInfo(requestData);
 
       setMonthlyPayments(response.monthlyPayments);
       setApr(response.apr);
       setDataLoaded(true);
+      setSpinner(false);
+      setDisabled(false);
       setId(response.id);
     } catch (error) {
       showAlert(
@@ -157,6 +163,8 @@ export default function FormOffers() {
             <Button
               classNameType="btn fw-bold"
               title="Submit Application"
+              spinner={spinner}
+              disabled={disabled}
               onClickProp={() => {
                 postSubmissionsData();
               }}

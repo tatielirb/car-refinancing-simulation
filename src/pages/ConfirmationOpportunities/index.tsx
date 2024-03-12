@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
+import { useAlerts } from "hooks/useAlerts";
+import { LoanAvailableData } from "types/Loans";
 import "./confirmationOpportunities.scss";
 import Card from "pages/ConfirmationOpportunities/components/Card";
 import ConfirmationMessage from "./components/ConfirmationMessage";
-
 import SimulatorService from "services/SimulatorService";
 import Alert from "components/Alert";
-import { useAlerts } from "hooks/useAlerts";
-import { Key } from "react";
-import { LoanAvailableData } from "types/Loans";
 
 export default function ConfirmationOpportunities() {
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
