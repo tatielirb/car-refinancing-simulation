@@ -32,7 +32,7 @@ export default function FormOffers() {
     }
   }, [amount, loanPurpose, terms]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(Number(event.target.value));
   };
 
@@ -138,7 +138,7 @@ export default function FormOffers() {
                 id="floatingInputValue"
                 type="number"
                 value={amount === undefined ? "" : amount}
-                onChange={handleInputChange}
+                onChange={handleAmountChange}
                 required
               />
               <label htmlFor="floatingInputValue">Total loan Amount*</label>
@@ -171,6 +171,10 @@ export default function FormOffers() {
             />
           </div>
         </div>
+
+        <p>O valor do input é: {amount}</p>
+        <p>O valor do loanPurpose é: {loanPurpose}</p>
+        <p>O valor do terms é: {terms}</p>
       </div>
     </div>
   );
