@@ -1,5 +1,11 @@
 # Car Refinancing Simulation
 
+
+
+https://github.com/tatielirb/car-refinancing-simulation/assets/5995859/9d3cd168-6036-4b40-add8-e905f2f4eba4
+
+
+
 ## Requirement
 
 - [Node.js](https://nodejs.org/)
