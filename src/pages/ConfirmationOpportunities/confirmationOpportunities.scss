@@ -54,9 +54,12 @@
   }
 
   .card {
-    margin: 20px;
+    margin: 0px;
     align-self: center;
     border-radius: 12px;
+    @media screen and (min-width: 992px) {
+      margin: 20px;
+    }
 
     &-header {
       background: var(--bs-white);

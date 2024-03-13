@@ -122,7 +122,7 @@ export default function FormOffers() {
 
       <div className="personal-form container text-center">
         <form className="row justify-content-md-center">
-          <div className="col col-4">
+          <div className="col col-12 col-sm col-md col-lg">
             <Select
               items={loanPurposeOptions}
               labelSelect="Loan Purpose*"
@@ -131,7 +131,7 @@ export default function FormOffers() {
               required={true}
             />
           </div>
-          <div className="col col-4">
+          <div className="col col-12 col-sm col-md col-lg">
             <div className="form-floating mb-5">
               <input
                 className="form-control"
@@ -144,7 +144,7 @@ export default function FormOffers() {
               <label htmlFor="floatingInputValue">Total loan Amount*</label>
             </div>
           </div>
-          <div className="col col-4">
+          <div className="col col-12 col-sm col-md col-lg">
             <Select
               items={loanTermOptions}
               labelSelect="Loan term(months)*"
@@ -153,13 +153,14 @@ export default function FormOffers() {
               required={true}
             />
           </div>
-
-          <Suspense fallback={<div>Loading...</div>}>
-            {dataLoaded ? <ListRow items={responseFees} /> : null}
-          </Suspense>
         </form>
+        
+        <Suspense fallback={<div>Loading...</div>}>
+          {dataLoaded ? <ListRow items={responseFees} /> : null}
+        </Suspense>
+
         <div className="row justify-content-md-center">
-          <div className="col col-6">
+          <div className="col-12 col-sm col-md col-lg">
             <Button
               classNameType="btn fw-bold"
               title="Submit Application"
@@ -171,10 +172,6 @@ export default function FormOffers() {
             />
           </div>
         </div>
-
-        <p>O valor do input é: {amount}</p>
-        <p>O valor do loanPurpose é: {loanPurpose}</p>
-        <p>O valor do terms é: {terms}</p>
       </div>
     </div>
   );

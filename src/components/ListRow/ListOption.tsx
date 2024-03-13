@@ -1,4 +1,3 @@
-import React from "react";
 import { OptionProps } from "types/components/Options";
 
 export default function ListOption({ value, label }: OptionProps) {
