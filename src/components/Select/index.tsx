@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import "assets/css/inputs.scss";
 import { SelectProps } from "types/components/Select";
 import Option from "./Option";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Select({
   labelSelect,
@@ -18,9 +19,12 @@ export default function Select({
     setValueSelect(valueChange);
     onChangeValue && onChangeValue(valueChange);
   };
+  const uniqueId = uuidv4();
+
   return (
     <div className="form-floating mb-5">
       <select
+        id={uniqueId}
         className="form-select"
         required={required}
         aria-label={labelSelect}
