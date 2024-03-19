@@ -17,7 +17,7 @@ export default function FormOffers() {
   const [loanPurpose, setLoanPurpose] = useState<string>("");
   const [terms, setTerms] = useState<number>(0);
   const [id, setId] = useState<string | undefined>();
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [feesLoaded, setFeesLoaded] = useState(false);
   const [spinner, setSpinner] = useState<boolean>();
   const [disabled, setDisabled] = useState<boolean>();
   const { showAlertDisplay, message, type, iconName, showAlert } = useAlerts();
@@ -27,7 +27,7 @@ export default function FormOffers() {
     if (loanPurpose !== " " && terms !== 0) {
       if (amount !== 0 && amount !== undefined && terms !== 0) {
         console.log("amount !== 0 && terms !== 0", amount, terms);
-        handleSubmit();
+        postOfferValues();
       }
     }
   }, [amount, loanPurpose, terms]);
@@ -55,21 +55,23 @@ export default function FormOffers() {
     },
   ];
 
-  const requestData = {
+  const requestOfferValues = {
     amount: amount || 0,
     loanPurpose: loanPurpose,
     terms: terms,
   };
 
-  const handleSubmit = async () => {
+  const postOfferValues = async () => {
     setSpinner(true);
     setDisabled(true);
     try {
-      const response = await SimulatorService.postOffersInfo(requestData);
+      const response = await SimulatorService.postOffersInfo(
+        requestOfferValues
+      );
 
       setMonthlyPayments(response.monthlyPayments);
       setApr(response.apr);
-      setDataLoaded(true);
+      setFeesLoaded(true);
       setSpinner(false);
       setDisabled(false);
       setId(response.id);
@@ -82,10 +84,10 @@ export default function FormOffers() {
     }
   };
 
-  const postSubmissionsData = async () => {
+  const postSubmissionsOffers = async () => {
     const submissionData = {
       offerId: id,
-      ...requestData,
+      ...requestOfferValues,
     };
 
     try {
@@ -106,7 +108,7 @@ export default function FormOffers() {
         showAlert(
           "warning",
           "It is necessary to fill in all fields on the form.",
-          "exclamat ion-circle-fill"
+          "exclamation-circle-fill"
         );
       }
     }
@@ -154,9 +156,9 @@ export default function FormOffers() {
             />
           </div>
         </form>
-        
+
         <Suspense fallback={<div>Loading...</div>}>
-          {dataLoaded ? <ListRow items={responseFees} /> : null}
+          {feesLoaded ? <ListRow items={responseFees} /> : null}
         </Suspense>
 
         <div className="row justify-content-md-center">
@@ -167,7 +169,7 @@ export default function FormOffers() {
               spinner={spinner}
               disabled={disabled}
               onClickProp={() => {
-                postSubmissionsData();
+                postSubmissionsOffers();
               }}
             />
           </div>

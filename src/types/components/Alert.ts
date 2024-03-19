@@ -1,5 +1,5 @@
 export interface AlertProps {
     message: string;
     type: string;
-    iconName?: string | undefined,
+    iconName?: string | undefined;
   }
